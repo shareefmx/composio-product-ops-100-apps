@@ -1,0 +1,423 @@
+[
+  {
+    "app_id": 2,
+    "app_name": "HubSpot",
+    "category": "CRM and Sales",
+    "pass1_claim": {
+      "auth": "OAuth2 / Private Token",
+      "access": "Self-Serve Free",
+      "api": "REST",
+      "mcp": "Composio Native"
+    },
+    "pass2_finding": {
+      "auth": "Private App Access Token & OAuth2",
+      "access": "Self-Serve Free",
+      "api": "REST",
+      "mcp": "Composio Native"
+    },
+    "discrepancy_type": "Correct",
+    "status": "Verified Correct",
+    "root_cause_explanation": "Pass 1 accurately identified free developer test accounts and private app tokens.",
+    "evidence_url": "https://developers.hubspot.com/docs/api/overview"
+  },
+  {
+    "app_id": 10,
+    "app_name": "DealCloud",
+    "category": "CRM and Sales",
+    "pass1_claim": {
+      "auth": "OAuth2",
+      "access": "Self-Serve Free",
+      "api": "REST",
+      "mcp": "None"
+    },
+    "pass2_finding": {
+      "auth": "OAuth2 (Client Credentials)",
+      "access": "Partner-Gated",
+      "api": "REST",
+      "mcp": "None"
+    },
+    "discrepancy_type": "Gating Overoptimism",
+    "status": "Corrected in Pass 2",
+    "root_cause_explanation": "Agent saw public Swagger portal at `api.docs.dealcloud.com` and assumed open signup. Real-world verification proved DealCloud requires an Intapp enterprise client agreement.",
+    "evidence_url": "https://api.docs.dealcloud.com/"
+  },
+  {
+    "app_id": 11,
+    "app_name": "Zendesk",
+    "category": "Support and Helpdesk",
+    "pass1_claim": {
+      "auth": "OAuth2 & API Token",
+      "access": "Self-Serve Free",
+      "api": "REST",
+      "mcp": "Composio Native"
+    },
+    "pass2_finding": {
+      "auth": "API Token (Basic Auth) & OAuth2",
+      "access": "Self-Serve Free",
+      "api": "REST",
+      "mcp": "Composio Native"
+    },
+    "discrepancy_type": "Correct",
+    "status": "Verified Correct",
+    "root_cause_explanation": "Pass 1 correctly identified 14-day free trial and Basic Auth token pair for single-tenant agent use.",
+    "evidence_url": "https://developer.zendesk.com/api-reference/"
+  },
+  {
+    "app_id": 20,
+    "app_name": "Gladly",
+    "category": "Support and Helpdesk",
+    "pass1_claim": {
+      "auth": "API Token",
+      "access": "Self-Serve Free",
+      "api": "REST",
+      "mcp": "None"
+    },
+    "pass2_finding": {
+      "auth": "API Token (Basic Auth)",
+      "access": "Partner-Gated",
+      "api": "Moderate (10-50 endpoints)",
+      "mcp": "None"
+    },
+    "discrepancy_type": "Gating Overoptimism",
+    "status": "Corrected in Pass 2",
+    "root_cause_explanation": "Agent assumed standard SaaS self-serve trial. In reality, Gladly requires an enterprise contract and provisions tokens strictly via tenant administrators.",
+    "evidence_url": "https://developer.gladly.com/"
+  },
+  {
+    "app_id": 21,
+    "app_name": "Slack",
+    "category": "Communications and Messaging",
+    "pass1_claim": {
+      "auth": "Bot Token / OAuth2",
+      "access": "Self-Serve Free",
+      "api": "REST + Socket Mode",
+      "mcp": "Official MCP"
+    },
+    "pass2_finding": {
+      "auth": "Bot User OAuth Token (`xoxb-`) & OAuth2",
+      "access": "Self-Serve Free",
+      "api": "REST (Web API) + Socket Mode",
+      "mcp": "Official MCP"
+    },
+    "discrepancy_type": "Correct",
+    "status": "Verified Correct",
+    "root_cause_explanation": "Pass 1 correctly captured Bot User OAuth tokens and Official Slack MCP server.",
+    "evidence_url": "https://api.slack.com/apis"
+  },
+  {
+    "app_id": 27,
+    "app_name": "Telegram",
+    "category": "Communications and Messaging",
+    "pass1_claim": {
+      "auth": "Bot Token",
+      "access": "Self-Serve Free",
+      "api": "REST",
+      "mcp": "Composio Native"
+    },
+    "pass2_finding": {
+      "auth": "Bot Token (`bot<token>`)",
+      "access": "Self-Serve Free",
+      "api": "REST",
+      "mcp": "Composio Native"
+    },
+    "discrepancy_type": "Correct",
+    "status": "Verified Correct",
+    "root_cause_explanation": "Pass 1 accurately verified instant zero-friction @BotFather provisioning.",
+    "evidence_url": "https://core.telegram.org/bots/api"
+  },
+  {
+    "app_id": 35,
+    "app_name": "Mailchimp",
+    "category": "Marketing, Ads, Email and Social",
+    "pass1_claim": {
+      "auth": "API Key",
+      "access": "Self-Serve Free",
+      "api": "REST",
+      "mcp": "Composio Native"
+    },
+    "pass2_finding": {
+      "auth": "API Key (`<key>-<dc>`) & OAuth2",
+      "access": "Self-Serve Free",
+      "api": "REST",
+      "mcp": "Composio Native"
+    },
+    "discrepancy_type": "Correct",
+    "status": "Verified Correct",
+    "root_cause_explanation": "Pass 1 identified free tier and API key availability; Pass 2 noted datacenter suffix formatting.",
+    "evidence_url": "https://mailchimp.com/developer/marketing/api/"
+  },
+  {
+    "app_id": 37,
+    "app_name": "systeme.io",
+    "category": "Marketing, Ads, Email and Social",
+    "pass1_claim": {
+      "auth": "OAuth2",
+      "access": "Self-Serve Free",
+      "api": "REST",
+      "mcp": "None"
+    },
+    "pass2_finding": {
+      "auth": "Public API Key (`X-API-Key`)",
+      "access": "Self-Serve Free",
+      "api": "REST",
+      "mcp": "None"
+    },
+    "discrepancy_type": "Auth Misclassification",
+    "status": "Corrected in Pass 2",
+    "root_cause_explanation": "Agent defaulted to OAuth2. Manual doc verification confirmed systeme.io uses a static header API key (`X-API-Key`).",
+    "evidence_url": "https://systeme.io/api"
+  },
+  {
+    "app_id": 41,
+    "app_name": "Shopify",
+    "category": "Ecommerce",
+    "website_hint": "shopify.dev",
+    "pass1_claim": {
+      "auth": "OAuth2 / Custom App Token",
+      "access": "Self-Serve Free",
+      "api": "GraphQL + REST",
+      "mcp": "Official MCP"
+    },
+    "pass2_finding": {
+      "auth": "Custom App Token (`shpat_`) & OAuth2",
+      "access": "Self-Serve Free",
+      "api": "GraphQL + REST",
+      "mcp": "Official MCP"
+    },
+    "discrepancy_type": "Correct",
+    "status": "Verified Correct",
+    "root_cause_explanation": "Pass 1 captured Partner account sandbox path and Official Shopify MCP.",
+    "evidence_url": "https://shopify.dev/docs/api/admin-rest"
+  },
+  {
+    "app_id": 50,
+    "app_name": "fanbasis",
+    "category": "Ecommerce",
+    "pass1_claim": {
+      "auth": "API Key",
+      "access": "Self-Serve Free",
+      "api": "REST",
+      "mcp": "None"
+    },
+    "pass2_finding": {
+      "auth": "Session Cookie / Undocumented",
+      "access": "No Public API",
+      "api": "None",
+      "mcp": "None"
+    },
+    "discrepancy_type": "Hallucinated Public API",
+    "status": "Corrected in Pass 3 (Human Intervention)",
+    "root_cause_explanation": "Agent hallucinated a REST API based on creator SaaS tropes. Active site audit proved Fanbasis has no public API or developer portal.",
+    "evidence_url": "https://fanbasis.com"
+  },
+  {
+    "app_id": 55,
+    "app_name": "Apify",
+    "category": "Data, SEO and Scraping",
+    "pass1_claim": {
+      "auth": "API Token",
+      "access": "Self-Serve Free",
+      "api": "REST",
+      "mcp": "Official MCP"
+    },
+    "pass2_finding": {
+      "auth": "API Token (Bearer)",
+      "access": "Self-Serve Free",
+      "api": "REST",
+      "mcp": "Official MCP"
+    },
+    "discrepancy_type": "Correct",
+    "status": "Verified Correct",
+    "root_cause_explanation": "Pass 1 identified $5/mo free recurring credit and turnkey Actor execution.",
+    "evidence_url": "https://docs.apify.com/api/v2"
+  },
+  {
+    "app_id": 58,
+    "app_name": "Sherlock",
+    "category": "Data, SEO and Scraping",
+    "pass1_claim": {
+      "auth": "API Key",
+      "access": "Self-Serve Free",
+      "api": "REST",
+      "mcp": "None"
+    },
+    "pass2_finding": {
+      "auth": "None (Open-Source CLI)",
+      "access": "Self-Serve Free",
+      "api": "CLI / Local",
+      "mcp": "Community MCP"
+    },
+    "discrepancy_type": "Architecture Misclassification",
+    "status": "Corrected in Pass 3 (Human Intervention)",
+    "root_cause_explanation": "Agent classified Sherlock as a hosted REST API. Human check verified it is an open-source Python CLI script making raw HTTP requests directly.",
+    "evidence_url": "https://github.com/sherlock-project/sherlock"
+  },
+  {
+    "app_id": 61,
+    "app_name": "GitHub",
+    "category": "Developer, Infra and Data platforms",
+    "pass1_claim": {
+      "auth": "Personal Access Token",
+      "access": "Self-Serve Free",
+      "api": "REST + GraphQL",
+      "mcp": "Official MCP"
+    },
+    "pass2_finding": {
+      "auth": "Personal Access Token (fine-grained) & OAuth2",
+      "access": "Self-Serve Free",
+      "api": "REST + GraphQL",
+      "mcp": "Official MCP"
+    },
+    "discrepancy_type": "Correct",
+    "status": "Verified Correct",
+    "root_cause_explanation": "Pass 1 captured free developer access and fine-grained PAT support.",
+    "evidence_url": "https://docs.github.com/en/rest"
+  },
+  {
+    "app_id": 65,
+    "app_name": "Supabase",
+    "category": "Developer, Infra and Data platforms",
+    "pass1_claim": {
+      "auth": "API Key (`service_role`)",
+      "access": "Self-Serve Free",
+      "api": "REST + GraphQL",
+      "mcp": "Official MCP"
+    },
+    "pass2_finding": {
+      "auth": "API Key (`anon`/`service_role`) & Management PAT",
+      "access": "Self-Serve Free",
+      "api": "REST (PostgREST) + Management REST",
+      "mcp": "Official MCP"
+    },
+    "discrepancy_type": "Correct",
+    "status": "Verified Correct",
+    "root_cause_explanation": "Pass 1 accurately confirmed free tier, PostgREST API, and Official Supabase MCP.",
+    "evidence_url": "https://supabase.com/docs/reference/api"
+  },
+  {
+    "app_id": 71,
+    "app_name": "Notion",
+    "category": "Productivity and Project Management",
+    "pass1_claim": {
+      "auth": "Internal Integration Secret",
+      "access": "Self-Serve Free",
+      "api": "REST",
+      "mcp": "Official MCP"
+    },
+    "pass2_finding": {
+      "auth": "Internal Integration Secret (`secret_`) & OAuth2",
+      "access": "Self-Serve Free",
+      "api": "REST",
+      "mcp": "Official MCP"
+    },
+    "discrepancy_type": "Correct",
+    "status": "Verified Correct",
+    "root_cause_explanation": "Pass 1 identified instant internal integration token generation and Official Notion MCP.",
+    "evidence_url": "https://developers.notion.com/reference/intro"
+  },
+  {
+    "app_id": 73,
+    "app_name": "Linear",
+    "category": "Productivity and Project Management",
+    "pass1_claim": {
+      "auth": "API Key",
+      "access": "Self-Serve Free",
+      "api": "REST",
+      "mcp": "Official MCP"
+    },
+    "pass2_finding": {
+      "auth": "Personal API Key (`lin_api_`) & OAuth2",
+      "access": "Self-Serve Free",
+      "api": "GraphQL",
+      "mcp": "Official MCP"
+    },
+    "discrepancy_type": "API Surface Misclassification",
+    "status": "Corrected in Pass 2",
+    "root_cause_explanation": "Agent assumed Linear provided a REST API. In reality, Linear only exposes a GraphQL API and webhooks.",
+    "evidence_url": "https://developers.linear.app/docs/graphql/working-with-the-graphql-api"
+  },
+  {
+    "app_id": 81,
+    "app_name": "Stripe",
+    "category": "Finance and Fintech",
+    "pass1_claim": {
+      "auth": "API Key (`sk_test_`)",
+      "access": "Self-Serve Free",
+      "api": "REST",
+      "mcp": "Official MCP"
+    },
+    "pass2_finding": {
+      "auth": "Secret API Key (Bearer) & OAuth Connect",
+      "access": "Self-Serve Free",
+      "api": "REST",
+      "mcp": "Official MCP"
+    },
+    "discrepancy_type": "Correct",
+    "status": "Verified Correct",
+    "root_cause_explanation": "Pass 1 identified instant free test keys and gold-standard agent tooling.",
+    "evidence_url": "https://docs.stripe.com/api"
+  },
+  {
+    "app_id": 90,
+    "app_name": "PitchBook",
+    "category": "Finance and Fintech",
+    "pass1_claim": {
+      "auth": "API Key",
+      "access": "Self-Serve Free",
+      "api": "REST",
+      "mcp": "None"
+    },
+    "pass2_finding": {
+      "auth": "API Key / OAuth2",
+      "access": "Partner-Gated",
+      "api": "Broad (>50 endpoints)",
+      "mcp": "None"
+    },
+    "discrepancy_type": "Gating Overoptimism",
+    "status": "Corrected in Pass 2",
+    "root_cause_explanation": "Agent assumed self-serve trial access. Verification verified PitchBook requires a $25k+/yr enterprise contract with no public developer sandbox.",
+    "evidence_url": "https://pitchbook.com/products/api"
+  },
+  {
+    "app_id": 92,
+    "app_name": "Otter AI",
+    "category": "AI, Research and Media-native",
+    "pass1_claim": {
+      "auth": "API Key",
+      "access": "Self-Serve Free",
+      "api": "REST",
+      "mcp": "None"
+    },
+    "pass2_finding": {
+      "auth": "Enterprise Token",
+      "access": "Self-Serve Paid",
+      "api": "Moderate (10-50 endpoints)",
+      "mcp": "Official MCP"
+    },
+    "discrepancy_type": "Gating & MCP Miss",
+    "status": "Corrected in Pass 2",
+    "root_cause_explanation": "Agent missed the Official Otter MCP server and falsely assumed free trial access. Otter restricts API & MCP strictly to paid Enterprise tiers.",
+    "evidence_url": "https://help.otter.ai/hc/en-us/articles/32410313575959-Otter-MCP-server"
+  },
+  {
+    "app_id": 98,
+    "app_name": "Mermaid CLI",
+    "category": "AI, Research and Media-native",
+    "pass1_claim": {
+      "auth": "API Key",
+      "access": "Self-Serve Free",
+      "api": "REST",
+      "mcp": "None"
+    },
+    "pass2_finding": {
+      "auth": "None (Local CLI)",
+      "access": "Self-Serve Free",
+      "api": "CLI / Local",
+      "mcp": "Community MCP"
+    },
+    "discrepancy_type": "Architecture Misclassification",
+    "status": "Corrected in Pass 3 (Human Intervention)",
+    "root_cause_explanation": "Agent assumed an HTTP web service. Mermaid CLI is a local Node CLI utility running headless Chromium via Puppeteer.",
+    "evidence_url": "https://github.com/mermaid-js/mermaid-cli"
+  }
+]
